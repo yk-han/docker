@@ -26,21 +26,22 @@ docker build --tag cubrid:10.2l .
 ##### (3) 컨테이너 생성하기
 
 ```docker
-docker run -d --name cubrid_keep -e "CUBRID_DB=keepdb" cubrid:10.2l
+docker run -d --name cubrid_temp -e "CUBRID_DB=db" cubrid:10.2l
 -생성하자마자 exited 되어 이상 설치 못함
 ```
 
 ##### (4) CUBRID Command Line Client(csql)에서 CUBRID 접속
 
 ```docker
-docker exec -it --user cubrid keep_cubrid csql keepdb
+docker exec -it --user cubrid cubrid_temp csql db
+xxx이하 미확인xxx
 ```
 
 ##### (5) 브로커 및 DB 서버용 시작 컨테이너
 
 ```docker
-docker run -d -e 'CUBRID_COMPONENTS=svr_keepdb' --name svr_cont_cubrid_keep cubrid:10.2l
-docker run -d -e 'CUBRID_COMPONENTS=brkr_keepdb' -e 'CUBRID_DB_HOST=svr_cubrid' -e 'CUBRID_DB=keepdb' --name brkr_cont_keepdb --link cubrid_server:svr_cont_keepdb cubrid:10.2l
+docker run -d -e 'CUBRID_COMPONENTS=svr_db' --name svr_cont_cubrid_temp cubrid:10.2l
+docker run -d -e 'CUBRID_COMPONENTS=brkr_db' -e 'CUBRID_DB_HOST=svr_cubrid' -e 'CUBRID_DB=db' --name brkr_cont_db --link cubrid_server:svr_cont_db cubrid:10.2l
 ```
 
 ##### (6) Docker Compose를 사용하여 브로커 및 DB 서버용 컨테이너 시작
@@ -76,22 +77,22 @@ docker-compose -p ha2-project-name -f tag/docker-compose-ha2.yml up
 ##### (1) Docker에서 이미지 받아오기
 
 ```docker
-docker pull sunxiaojay123/10.2-cudnn7-devel-ubuntu18.04-pytorch1.7.1:v1
--에러 : failed to solve with frontend dockerfile.v0: failed to create LLB definition: dockerfile parse error line 19: unknown instruction: CHOWN
+docker pull cubrid/10.2
 ```
 
 ##### (2) 이미지 빌드하기
 
 ```docker
-docker build --tag cubrid:10.2l .
-
+docker build --tag cubrid:10.2 .
+-에러 : failed to solve with frontend dockerfile.v0: failed to create LLB definition: dockerfile parse error line 19: unknown instruction: CHOWN
+->Troubleshoote > reset
 ```
 
 ##### (3) 컨테이너 생성하기
 
 ```docker
-docker run -d -p 30000:30000 --name keep_cubrid -e "CUBRID_DB=keepdb" cubrid:10.2l
-생성하자마자 exited 되어 이상 설치 못함
+docker run -d -p 33000:33000 --name keep_cubrid -e "CUBRID_DB=db" cubrid:10.2l
+생성하자마자 exited 되어 이상 설치 못함 ->
 ```
 
 ##### 설치방법 1의 (4) ~(9)와 동일
@@ -106,7 +107,7 @@ docker run -d -p 30000:30000 --name keep_cubrid -e "CUBRID_DB=keepdb" cubrid:10.
 ##### (1) 이미지 생성 방법으로 설치
 
 ```docker
-주의 모두 공개 되어야 함. 비공개는 유료.
+작업예정.
 ```
 
 
