@@ -21,6 +21,7 @@ docker build --tag cubrid:10.2l .
   > 권한문제, 경로문제, Kubernetes 관련 인증문제 등
 ※ https://github.com/CUBRID/cubrid-docker - 도커제공 파일에 대한 설치 방법 설명
 ※ https://www.cubrid.com/blog/3820603 - Docker, Kubernetes 환경
+xxx 이하 미확인 작업예정 xxx
 ```
 
 ##### (3) 컨테이너 생성하기
@@ -34,7 +35,6 @@ docker run -d --name cubrid_temp -e "CUBRID_DB=db" cubrid:10.2l
 
 ```docker
 docker exec -it --user cubrid cubrid_temp csql db
-xxx이하 미확인xxx
 ```
 
 ##### (5) 브로커 및 DB 서버용 시작 컨테이너
@@ -91,8 +91,9 @@ docker build --tag cubrid:10.2 .
 ##### (3) 컨테이너 생성하기
 
 ```docker
-docker run -d -p 33000:33000 --name keep_cubrid -e "CUBRID_DB=db" cubrid:10.2l
+docker run -d -p 33000:33000 --name cubrid_temp -e "CUBRID_DB=db" cubrid:10.2l
 생성하자마자 exited 되어 이상 설치 못함 ->
+xxx 이하 미확인 작업예정 xxx
 ```
 
 ##### 설치방법 1의 (4) ~(9)와 동일
