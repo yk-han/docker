@@ -32,3 +32,9 @@ web.xml 파일 수정 : OPTIONS 기능 막기
 > telnet 0 8080
 OPTION / HTTP/1.0
 ```
+
+**참조**
+
+```
+http://repository.egloos.com/v/5007347
+```
